@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.image.ImageView?>
+<VBox spacing="10" alignment="CENTER"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.possystem.controller.ProductAddController"
+      style="-fx-padding: 20;">
+
+    <Label text="Add Product" style="-fx-font-size: 18px;" />
+
+    <TextField fx:id="nameField" promptText="Product Name"/>
+    <TextField fx:id="priceField" promptText="Price"/>
+    <TextField fx:id="stockField" promptText="Stock"/>
+
+    <ComboBox fx:id="statusBox">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Available"/>
+                <String fx:value="Sold Out"/>
+            </FXCollections>
+        </items>
+    </ComboBox>
+
+    <Button text="Select Image" onAction="#chooseImage"/>
+    <ImageView fx:id="imageView" fitWidth="100" fitHeight="100"/>
+
+    <Button text="ADD" onAction="#confirm"/>
+</VBox>

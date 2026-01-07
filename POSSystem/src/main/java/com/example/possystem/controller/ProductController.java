@@ -4,9 +4,13 @@ import com.example.possystem.model.Product;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class ProductController {
 
@@ -38,7 +42,25 @@ public class ProductController {
     }
 
     public void addProduct() {
-        productList.add(new Product("New Product", 0, 0, "Available", null));
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/example/possystem/product_add.fxml")
+            );
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Add Product");
+            stage.showAndWait();
+
+            ProductAddController controller = loader.getController();
+            Product product = controller.getResult();
+            if (product != null) {
+                productList.add(product);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void editProduct() {
