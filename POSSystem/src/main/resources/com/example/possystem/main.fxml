@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15" alignment="CENTER"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.possystem.controller.MainController">
+
+<Label text="Point-of-Sale System" style="-fx-font-size: 22px;" />
+
+<Button text="Product Management" onAction="#openProduct"/>
+<Button text="Process Sale" onAction="#openSale"/>
+<Button text="Handle Returns" onAction="#openReturn"/>
+<Button text="Customer List" onAction="#openCustomer"/>
+
+</VBox>
+
