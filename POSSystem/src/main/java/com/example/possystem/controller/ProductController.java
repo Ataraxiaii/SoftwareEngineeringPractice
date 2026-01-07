@@ -1,6 +1,7 @@
 package com.example.possystem.controller;
 
 import com.example.possystem.model.Product;
+import com.example.possystem.util.SceneSwitcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -107,6 +108,7 @@ public class ProductController {
     }
 
     public void goBack() {
+        SceneSwitcher.switchScene("/com/example/possystem/main.fxml");
         System.out.println("Go back to main interface");
     }
 
