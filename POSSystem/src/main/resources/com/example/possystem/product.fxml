@@ -13,6 +13,11 @@
         <Label text="Product Management" style="-fx-font-size: 20px;" BorderPane.alignment="CENTER"/>
     </top>
 
+    <VBox spacing="5">
+        <TextField fx:id="searchField" promptText="Search Product"/>
+        <Button text="SEARCH" onAction="#search"/>
+    </VBox>
+
     <center>
         <TableView fx:id="tableView">
 

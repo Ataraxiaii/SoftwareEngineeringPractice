@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -28,6 +29,11 @@ public class ProductController {
     private TableColumn<Product, String> statusCol;
     @FXML
     private TableColumn<Product, ImageView> imageCol;
+    @FXML
+    private TextField searchField;
+
+
+    private ObservableList<Product> allProducts = FXCollections.observableArrayList();
 
     private ObservableList<Product> productList = FXCollections.observableArrayList();
 
@@ -42,6 +48,8 @@ public class ProductController {
         productList.add(new Product("薯片", 10.0, 100, "在售", null));
         productList.add(new Product("可乐", 8.0, 50, "在售", null));
 
+        tableView.setItems(productList);
+        allProducts.addAll(productList);
         tableView.setItems(productList);
     }
 
@@ -85,4 +93,17 @@ public class ProductController {
     public void goBack() {
         System.out.println("Go back to main interface");
     }
+
+    public void search() {
+        String keyword = searchField.getText().toLowerCase();
+        productList.clear();
+
+        for (Product p : allProducts) {
+            if (p.getName().toLowerCase().contains(keyword)) {
+                productList.add(p);
+            }
+        }
+    }
+
 }
+
