@@ -39,7 +39,8 @@ public class ProductController {
 
     @FXML
     public void initialize() {
-        tableView.setItems(productService.getProducts()); // load from database
+        // load product database
+        allProducts = productService.getProducts();
         tableView.setItems(allProducts);
 
         imageCol.setCellValueFactory(new PropertyValueFactory<>("imageView"));
