@@ -13,7 +13,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return name;
+        return name + "（Stock：" + stock + "）";
     }
 
     public Product(String name, double price, int stock, String status, String imagePath) {

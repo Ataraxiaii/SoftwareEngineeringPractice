@@ -1,5 +1,7 @@
 package com.example.possystem.controller;
 
+import com.example.possystem.model.CustomerRecord;
+import com.example.possystem.model.CustomerRecordManager;
 import com.example.possystem.model.Order;
 import com.example.possystem.model.OrderItem;
 import com.example.possystem.util.SceneSwitcher;
@@ -58,7 +60,16 @@ public class ReceiptController {
 
     // Go back to main page
     public void finish() {
-        // CustomerRecordManager.addOrder(order);
+        // record shopping
+        CustomerRecordManager.addRecord(
+                new CustomerRecord(
+                        order.getCustomerName(),
+                        order.getPhone(),
+                        order.getItems(),
+                        order.getTotalAmount(),
+                        "Shopping"
+                )
+        );
         SceneSwitcher.switchScene("/com/example/possystem/main.fxml");
     }
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.possystem.controller.CustomerListController">
+
+    <top>
+        <Label text="Customer List" style="-fx-font-size: 20px;" BorderPane.alignment="CENTER"/>
+    </top>
+
+    <center>
+        <TableView fx:id="customerTable">
+
+            <columns>
+                <TableColumn fx:id="nameCol" text="Name"/>
+                <TableColumn fx:id="phoneCol" text="Phone"/>
+                <TableColumn fx:id="itemsCol" text="Items"/>
+                <TableColumn fx:id="totalCol" text="Total"/>
+                <TableColumn fx:id="typeCol" text="Type"/>
+                <TableColumn fx:id="timeCol" text="Time"/>
+            </columns>
+
+        </TableView>
+    </center>
+
+    <bottom>
+        <Button text="BACK" onAction="#goBack" style="-fx-padding:10;"/>
+    </bottom>
+
+</BorderPane>

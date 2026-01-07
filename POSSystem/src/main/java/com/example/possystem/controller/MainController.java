@@ -19,6 +19,7 @@ public class MainController {
     }
 
     public void openCustomer() {
+        SceneSwitcher.switchScene("/com/example/possystem/customer_list.fxml");
         System.out.println("Enter the customer list interface");
     }
 }
