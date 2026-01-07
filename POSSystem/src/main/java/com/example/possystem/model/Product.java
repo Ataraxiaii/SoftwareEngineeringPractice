@@ -1,5 +1,8 @@
 package com.example.possystem.model;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 public class Product {
 
     private String name;
@@ -31,4 +34,12 @@ public class Product {
 
     public String getImagePath() { return imagePath; }
     public void setImagePath(String imagePath) { this.imagePath = imagePath; }
+    public ImageView getImageView() {
+        if (imagePath == null) return null;
+        ImageView iv = new ImageView(new Image(imagePath));
+        iv.setFitWidth(50);
+        iv.setFitHeight(50);
+        return iv;
+    }
+
 }

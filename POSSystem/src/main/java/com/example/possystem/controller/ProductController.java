@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class ProductController {
@@ -25,11 +26,14 @@ public class ProductController {
     private TableColumn<Product, Integer> stockCol;
     @FXML
     private TableColumn<Product, String> statusCol;
+    @FXML
+    private TableColumn<Product, ImageView> imageCol;
 
     private ObservableList<Product> productList = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
+        imageCol.setCellValueFactory(new PropertyValueFactory<>("imageView"));
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
         stockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
