@@ -77,9 +77,25 @@ public class ProductController {
 
     public void editProduct() {
         Product selected = tableView.getSelectionModel().getSelectedItem();
-        if (selected != null) {
-            selected.setPrice(selected.getPrice() + 1);
+        if (selected == null) return;
+
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/example/possystem/product_add.fxml")
+            );
+            Parent root = loader.load();
+
+            ProductAddController controller = loader.getController();
+            controller.setProduct(selected);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Modify Product");
+            stage.showAndWait();
+
             tableView.refresh();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
