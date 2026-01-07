@@ -5,7 +5,7 @@ module com.example.possystem {
 
     opens com.example.possystem to javafx.fxml;
     opens com.example.possystem.controller to javafx.fxml;
-    opens com.example.possystem.model to javafx.fxml;
+    opens com.example.possystem.model to javafx.base;
 
     exports com.example.possystem;
 }
