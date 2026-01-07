@@ -1,5 +1,6 @@
 package com.example.possystem;
 
+import com.example.possystem.util.SceneSwitcher;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,5 +21,6 @@ public class MainApplication extends Application {
         stage.setTitle("POS System");
         stage.setScene(scene);
         stage.show();
+        SceneSwitcher.setStage(stage);
     }
 }

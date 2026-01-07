@@ -1,8 +1,11 @@
 package com.example.possystem.controller;
 
+import com.example.possystem.util.SceneSwitcher;
+
 public class MainController {
 
     public void openProduct() {
+        SceneSwitcher.switchScene("/com/example/possystem/product.fxml");
         System.out.println("Enter the product management interface");
     }
 

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.possystem.controller.ProductController">
+
+    <top>
+        <Label text="Product Management" style="-fx-font-size: 20px;" BorderPane.alignment="CENTER"/>
+    </top>
+
+    <center>
+        <TableView fx:id="tableView">
+
+            <columns>
+                <TableColumn fx:id="nameCol" text="Product Name" prefWidth="120"/>
+                <TableColumn fx:id="priceCol" text="Price" prefWidth="80"/>
+                <TableColumn fx:id="stockCol" text="Stock" prefWidth="80"/>
+                <TableColumn fx:id="statusCol" text="Status" prefWidth="80"/>
+            </columns>
+
+        </TableView>
+    </center>
+
+    <bottom>
+        <HBox spacing="10" alignment="CENTER" style="-fx-padding: 10;">
+            <Button text="ADD" onAction="#addProduct"/>
+            <Button text="MODIFY" onAction="#editProduct"/>
+            <Button text="DELETE" onAction="#deleteProduct"/>
+            <Button text="BACK" onAction="#goBack"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>
