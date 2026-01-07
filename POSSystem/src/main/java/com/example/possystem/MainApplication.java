@@ -1,5 +1,6 @@
 package com.example.possystem;
 
+import com.example.possystem.util.DBUtil;
 import com.example.possystem.util.SceneSwitcher;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,20 +8,20 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class MainApplication extends Application {
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-
     @Override
     public void start(Stage stage) throws Exception {
+        DBUtil.initDB();
+        SceneSwitcher.setStage(stage);
+
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("/com/example/possystem/main.fxml")
         );
-        Scene scene = new Scene(loader.load(), 400, 400);
+        stage.setScene(new Scene(loader.load()));
         stage.setTitle("POS System");
-        stage.setScene(scene);
         stage.show();
-        SceneSwitcher.setStage(stage);
+    }
+
+    public static void main(String[] args) {
+        launch();
     }
 }

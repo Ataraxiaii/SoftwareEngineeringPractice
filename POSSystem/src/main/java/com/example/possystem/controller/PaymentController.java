@@ -1,6 +1,7 @@
 package com.example.possystem.controller;
 
 import com.example.possystem.model.Order;
+import com.example.possystem.service.CustomerRecordService;
 import com.example.possystem.util.SceneSwitcher;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -46,6 +47,15 @@ public class PaymentController {
         order.setCustomerName(nameField.getText());
         order.setPhone(phoneField.getText());
         order.setPaidAmount(paid);
+
+        // save to Customer databases
+        try {
+            CustomerRecordService.getInstance().addRecord(order.toCustomerRecord());
+        } catch (Exception e) {
+            e.printStackTrace();
+            alert("Failed to save order to database");
+            return;
+        }
 
         // Receipt screen
         SceneSwitcher.switchScene("/com/example/possystem/receipt.fxml", controller -> {

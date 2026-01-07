@@ -1,6 +1,7 @@
 package com.example.possystem.controller;
 
 import com.example.possystem.model.Product;
+import com.example.possystem.service.ProductService;
 import com.example.possystem.util.SceneSwitcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -33,49 +34,44 @@ public class ProductController {
     @FXML
     private TextField searchField;
 
-
-    private ObservableList<Product> allProducts = FXCollections.observableArrayList();
-
-    private ObservableList<Product> productList = FXCollections.observableArrayList();
+    private ProductService productService = ProductService.getInstance();
+    private ObservableList<Product> allProducts;
 
     @FXML
     public void initialize() {
+        tableView.setItems(productService.getProducts()); // load from database
+        tableView.setItems(allProducts);
+
         imageCol.setCellValueFactory(new PropertyValueFactory<>("imageView"));
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
         stockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
-
-        productList.add(new Product("薯片", 10.0, 100, "在售", null));
-        productList.add(new Product("可乐", 8.0, 50, "在售", null));
-
-        tableView.setItems(productList);
-        allProducts.addAll(productList);
-        tableView.setItems(productList);
     }
 
+    @FXML
     public void addProduct() {
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/com/example/possystem/product_add.fxml")
             );
-            Parent root = loader.load();
-
+            Scene scene = new Scene(loader.load());
             Stage stage = new Stage();
-            stage.setScene(new Scene(root));
+            stage.setScene(scene);
             stage.setTitle("Add Product");
             stage.showAndWait();
 
             ProductAddController controller = loader.getController();
             Product product = controller.getResult();
             if (product != null) {
-                productList.add(product);
+                productService.addProduct(product);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    @FXML
     public void editProduct() {
         Product selected = tableView.getSelectionModel().getSelectedItem();
         if (selected == null) return;
@@ -94,34 +90,42 @@ public class ProductController {
             stage.setTitle("Modify Product");
             stage.showAndWait();
 
-            tableView.refresh();
+            Product newProduct = controller.getResult();
+            if (newProduct != null) {
+                productService.updateProduct(selected, newProduct); // update database
+                tableView.refresh();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    @FXML
     public void deleteProduct() {
         Product selected = tableView.getSelectionModel().getSelectedItem();
         if (selected != null) {
-            productList.remove(selected);
+            productService.removeProduct(selected); // delete database
         }
     }
 
+    @FXML
     public void goBack() {
         SceneSwitcher.switchScene("/com/example/possystem/main.fxml");
         System.out.println("Go back to main interface");
     }
 
+    @FXML
     public void search() {
-        String keyword = searchField.getText().toLowerCase();
-        productList.clear();
-
-        for (Product p : allProducts) {
-            if (p.getName().toLowerCase().contains(keyword)) {
-                productList.add(p);
-            }
+        String keyword = searchField.getText().toLowerCase().trim();
+        if (keyword.isEmpty()) {
+            tableView.setItems(allProducts);
+            return;
         }
-    }
 
+        ObservableList<Product> filtered = allProducts.filtered(p ->
+                p.getName().toLowerCase().contains(keyword)
+        );
+        tableView.setItems(filtered);
+    }
 }
 

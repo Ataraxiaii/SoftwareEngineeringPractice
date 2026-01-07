@@ -18,6 +18,16 @@ public class Order {
         this.createTime = LocalDateTime.now();
     }
 
+    public com.example.possystem.model.CustomerRecord toCustomerRecord() {
+        return new com.example.possystem.model.CustomerRecord(
+                this.getCustomerName(),
+                this.getPhone(),
+                this.getItems(),
+                this.getTotalAmount(),
+                "Shopping"
+        );
+    }
+
     // ===== getter & setter =====
     public String getCustomerName() { return customerName; }
     public void setCustomerName(String customerName) { this.customerName = customerName; }
