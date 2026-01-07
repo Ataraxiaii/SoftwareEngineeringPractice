@@ -10,13 +10,20 @@
             fx:controller="com.example.possystem.controller.ProductController">
 
     <top>
-        <Label text="Product Management" style="-fx-font-size: 20px;" BorderPane.alignment="CENTER"/>
+        <VBox spacing="10" style="-fx-padding: 10; -fx-background-color: white; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, #dddddd, 5, 0, 0, 2);">
+            <Label text="Product Management" style="-fx-font-size: 20px;" BorderPane.alignment="CENTER"/>
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <TextField fx:id="searchField" promptText="Search Product"/>
+                <Button text="SEARCH" onAction="#search"/>
+            </HBox>
+        </VBox>
     </top>
 
     <center>
         <TableView fx:id="tableView">
 
             <columns>
+                <TableColumn fx:id="imageCol" text="Image" prefWidth="80"/>
                 <TableColumn fx:id="nameCol" text="Product Name" prefWidth="120"/>
                 <TableColumn fx:id="priceCol" text="Price" prefWidth="80"/>
                 <TableColumn fx:id="stockCol" text="Stock" prefWidth="80"/>
