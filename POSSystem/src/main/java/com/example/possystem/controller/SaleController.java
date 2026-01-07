@@ -1,5 +1,6 @@
 package com.example.possystem.controller;
 
+import com.example.possystem.model.Order;
 import com.example.possystem.model.OrderItem;
 import com.example.possystem.model.Product;
 import com.example.possystem.util.SceneSwitcher;
@@ -101,6 +102,22 @@ public class SaleController {
     }
 
     public void submit() {
+        if (cartList.isEmpty()) {
+            alert("Cashier is empty");
+            return;
+        }
+
+        double total = 0;
+        for (OrderItem item : cartList) {
+            total += item.getSubtotal();
+        }
+
+        Order order = new Order(cartList, total);
+
+        SceneSwitcher.switchScene(
+                "/com/example/possystem/payment.fxml",
+                controller -> ((PaymentController) controller).setOrder(order)
+        );
         System.out.println("Go to the payment screen (Next)");
     }
 

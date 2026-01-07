@@ -11,6 +11,11 @@ public class Product {
     private String status; // Available / Sold Out
     private String imagePath;
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
     public Product(String name, double price, int stock, String status, String imagePath) {
         this.name = name;
         this.price = price;
