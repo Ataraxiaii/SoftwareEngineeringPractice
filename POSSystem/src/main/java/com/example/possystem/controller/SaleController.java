@@ -3,6 +3,7 @@ package com.example.possystem.controller;
 import com.example.possystem.model.Order;
 import com.example.possystem.model.OrderItem;
 import com.example.possystem.model.Product;
+import com.example.possystem.service.ProductService;
 import com.example.possystem.util.SceneSwitcher;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -25,20 +26,12 @@ public class SaleController {
 
     @FXML private Label totalLabel;
 
-    private ObservableList<Product> productList =
-            FXCollections.observableArrayList();
-
-    private ObservableList<OrderItem> cartList =
-            FXCollections.observableArrayList();
+    private ObservableList<OrderItem> cartList = FXCollections.observableArrayList();
+    private ProductService productService = ProductService.getInstance();
 
     @FXML
     public void initialize() {
-        productList.addAll(
-                new Product("薯片", 10, 20, "在售", null),
-                new Product("可乐", 8, 5, "在售", null)
-        );
-
-        productListView.setItems(productList);
+        productListView.setItems(productService.getProducts()); // load from database
 
         cartNameCol.setCellValueFactory(data ->
                 new SimpleStringProperty(data.getValue().getProduct().getName()));
@@ -54,7 +47,6 @@ public class SaleController {
 
     // add to Cashier
     public void addToCart() {
-
         Product product = productListView.getSelectionModel().getSelectedItem();
         if (product == null) return;
 
@@ -75,6 +67,7 @@ public class SaleController {
         // add to Cashier and reduce the stock
         cartList.add(new OrderItem(product, qty));
         product.setStock(product.getStock() - qty);
+        productService.updateProduct(product, product); // update database
 
         updateTotal();
         quantityField.clear();
@@ -88,8 +81,9 @@ public class SaleController {
         // Deleting will roll back
         Product p = item.getProduct();
         p.setStock(p.getStock() + item.getQuantity());
-        cartList.remove(item);
+        productService.updateProduct(p, p);  // update database
 
+        cartList.remove(item);
         updateTotal();
     }
 

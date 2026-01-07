@@ -2,6 +2,7 @@ package com.example.possystem.controller;
 
 import com.example.possystem.model.CustomerRecord;
 import com.example.possystem.model.CustomerRecordManager;
+import com.example.possystem.service.CustomerRecordService;
 import com.example.possystem.util.SceneSwitcher;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -24,7 +25,8 @@ public class CustomerListController {
 
     @FXML
     public void initialize() {
-        ObservableList<CustomerRecord> records = CustomerRecordManager.getRecords();
+        // load from customer database
+        ObservableList<CustomerRecord> records = CustomerRecordService.getInstance().getRecords();
         customerTable.setItems(records);
 
         nameCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCustomerName()));
