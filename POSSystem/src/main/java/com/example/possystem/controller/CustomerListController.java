@@ -8,6 +8,8 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -37,6 +39,23 @@ public class CustomerListController {
         timeCol.setCellValueFactory(data -> new SimpleStringProperty(
                 data.getValue().getCreateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
         ));
+    }
+
+    @FXML
+    public void deleteRecord() {
+        CustomerRecord selected = customerTable.getSelectionModel().getSelectedItem();
+        if (selected == null) return;
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                "Are you sure you want to delete this customer record?",
+                ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES) {
+            // delete dataabse
+            CustomerRecordService.getInstance().removeRecord(selected);
+            customerTable.getItems().remove(selected);
+        }
     }
 
     public void goBack() {

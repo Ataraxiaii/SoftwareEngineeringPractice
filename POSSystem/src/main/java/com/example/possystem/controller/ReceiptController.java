@@ -71,9 +71,6 @@ public class ReceiptController {
                     "Shopping"
             );
 
-            // save to customer database
-            CustomerRecordService.getInstance().addRecord(record);
-
             // Back to main pages
             SceneSwitcher.switchScene("/com/example/possystem/main.fxml");
         } catch (Exception e) {
