@@ -31,5 +31,5 @@
     <Button text="Select Image" onAction="#chooseImage"/>
     <ImageView fx:id="imageView" fitWidth="100" fitHeight="100"/>
 
-    <Button text="ADD" onAction="#confirm"/>
+    <Button text="OK" onAction="#confirm"/>
 </VBox>
