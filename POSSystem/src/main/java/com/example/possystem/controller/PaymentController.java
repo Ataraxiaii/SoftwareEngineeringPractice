@@ -48,7 +48,9 @@ public class PaymentController {
         order.setPaidAmount(paid);
 
         // Receipt screen
-        SceneSwitcher.switchScene("/com/example/possystem/receipt.fxml");
+        SceneSwitcher.switchScene("/com/example/possystem/receipt.fxml", controller -> {
+            ((ReceiptController) controller).setOrder(order);
+        });
     }
 
     public void cancel() {
