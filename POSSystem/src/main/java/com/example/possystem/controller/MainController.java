@@ -10,6 +10,7 @@ public class MainController {
     }
 
     public void openSale() {
+        SceneSwitcher.switchScene("/com/example/possystem/sale.fxml");
         System.out.println("Enter the sale interface");
     }
 

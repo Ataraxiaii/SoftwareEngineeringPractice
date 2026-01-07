@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="12" alignment="CENTER"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.possystem.controller.ReceiptController"
+      style="-fx-padding: 20;">
+
+    <Label text="Receipt" style="-fx-font-size: 20px;"/>
+
+    <Label fx:id="customerLabel" text="Customer: "/>
+    <Label fx:id="phoneLabel" text="Phone: "/>
+
+    <TableView fx:id="receiptTable" prefHeight="300">
+        <columns>
+            <TableColumn fx:id="nameCol" text="Product"/>
+            <TableColumn fx:id="priceCol" text="Unit Price"/>
+            <TableColumn fx:id="qtyCol" text="Quantity"/>
+            <TableColumn fx:id="subtotalCol" text="Subtotal"/>
+        </columns>
+    </TableView>
+
+    <Label fx:id="totalLabel" text="Total: $0.0"/>
+    <Label fx:id="paidLabel" text="Paid: $0.0"/>
+    <Label fx:id="changeLabel" text="Change: $0.0"/>
+
+    <Button text="OK" onAction="#finish"/>
+</VBox>
