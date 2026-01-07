@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CustomerRecord {
-
+    private int id;
     private String customerName;
     private String phone;
     private List<OrderItem> items;
@@ -13,15 +13,24 @@ public class CustomerRecord {
     private String type; // "Shopping" or "Returning"
     private LocalDateTime createTime;
 
-    public CustomerRecord(String customerName, String phone, List<OrderItem> items,
-                          double totalAmount, String type) {
+    public CustomerRecord(int id, String customerName, String phone, List<OrderItem> items,
+                          double totalAmount, String type, LocalDateTime createTime) {
+        this.id = id;
         this.customerName = customerName;
         this.phone = phone;
         this.items = items;
         this.totalAmount = totalAmount;
         this.type = type;
-        this.createTime = LocalDateTime.now();
+        this.createTime = createTime;
     }
+
+    public CustomerRecord(String customerName, String phone, List<OrderItem> items,
+                          double totalAmount, String type) {
+        this(-1, customerName, phone, items, totalAmount, type, LocalDateTime.now());
+    }
+
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
     public String getCustomerName() { return customerName; }
     public String getPhone() { return phone; }

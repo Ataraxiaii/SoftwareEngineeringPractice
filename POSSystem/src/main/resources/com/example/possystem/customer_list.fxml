@@ -29,7 +29,10 @@
     </center>
 
     <bottom>
-        <Button text="BACK" onAction="#goBack" style="-fx-padding:10;"/>
+        <HBox spacing="10" alignment="CENTER" style="-fx-padding: 10;">
+            <Button text="DELETE" onAction="#deleteRecord"/>
+            <Button text="BACK" onAction="#goBack"/>
+        </HBox>
     </bottom>
 
 </BorderPane>
