@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.possystem.controller.SaleController">
+
+    <top>
+        <Label text="Process Sale" style="-fx-font-size: 20px;" BorderPane.alignment="CENTER"/>
+    </top>
+
+    <left>
+        <VBox spacing="10" style="-fx-padding: 10;">
+            <Label text="Product List"/>
+
+            <ListView fx:id="productListView"/>
+
+            <TextField fx:id="quantityField" promptText="Quantity of products purchased"/>
+
+            <Button text="Add Cashier" onAction="#addToCart"/>
+        </VBox>
+    </left>
+
+    <center>
+        <TableView fx:id="cartTable">
+
+            <columns>
+                <TableColumn fx:id="cartNameCol" text="Product"/>
+                <TableColumn fx:id="cartPriceCol" text="Unit Price"/>
+                <TableColumn fx:id="cartQtyCol" text="Quantity"/>
+                <TableColumn fx:id="cartSubCol" text="Subtotal"/>
+            </columns>
+
+        </TableView>
+    </center>
+
+    <bottom>
+        <HBox spacing="20" alignment="CENTER" style="-fx-padding: 10;">
+            <Label text="Total Price：" />
+            <Label fx:id="totalLabel" text="0.0"/>
+            <Button text="DELETE" onAction="#removeItem"/>
+            <Button text="SUBMIT" onAction="#submit"/>
+            <Button text="BACK" onAction="#goBack"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>
