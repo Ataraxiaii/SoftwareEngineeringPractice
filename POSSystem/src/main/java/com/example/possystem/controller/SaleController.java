@@ -67,7 +67,6 @@ public class SaleController {
         // add to Cashier and reduce the stock
         cartList.add(new OrderItem(product, qty));
         product.setStock(product.getStock() - qty);
-        productService.updateProduct(product, product); // update database
 
         updateTotal();
         quantityField.clear();
@@ -81,7 +80,6 @@ public class SaleController {
         // Deleting will roll back
         Product p = item.getProduct();
         p.setStock(p.getStock() + item.getQuantity());
-        productService.updateProduct(p, p);  // update database
 
         cartList.remove(item);
         updateTotal();

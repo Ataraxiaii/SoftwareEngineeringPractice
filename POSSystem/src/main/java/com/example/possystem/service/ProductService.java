@@ -79,21 +79,26 @@ public class ProductService {
     }
 
     // update product
-    public void updateProduct(Product product, Product product1) {
-        String sql = "UPDATE product SET name=?, price=?, stock=?, status=?, image_path=? WHERE id=?";
+    public void updateProduct(Product p) {
+        String sql =
+                "UPDATE product " +
+                        "SET price = ?, stock = ?, status = ?, image_path = ? " +
+                        "WHERE name = ?";
 
         try (Connection conn = DBUtil.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setString(1, product.getName());
-            ps.setDouble(2, product.getPrice());
-            ps.setInt(3, product.getStock());
-            ps.setString(4, product.getStatus());
-            ps.setString(5, product.getImagePath());
-            ps.setString(6, product.getName());
+            ps.setDouble(1, p.getPrice());
+            ps.setInt(2, p.getStock());
+
+            ps.setString(3, p.getStock() > 0 ? "Available" : "Sold Out");
+
+            ps.setString(4, p.getImagePath());
+            ps.setString(5, p.getName());
 
             ps.executeUpdate();
-        } catch (Exception e) {
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
