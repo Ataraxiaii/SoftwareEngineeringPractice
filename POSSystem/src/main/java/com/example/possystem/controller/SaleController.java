@@ -68,6 +68,8 @@ public class SaleController {
         cartList.add(new OrderItem(product, qty));
         product.setStock(product.getStock() - qty);
 
+        productListView.refresh();
+
         updateTotal();
         quantityField.clear();
     }
