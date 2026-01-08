@@ -10,10 +10,10 @@
 <?import javafx.scene.image.ImageView?>
 <VBox spacing="10" alignment="CENTER"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.possystem.controller.ProductAddController"
+      fx:controller="com.example.possystem.controller.ProductModifyController"
       style="-fx-padding: 20;">
 
-    <Label text="Add Product" style="-fx-font-size: 18px;" />
+    <Label text="Modify Product" style="-fx-font-size: 18px;" />
 
     <TextField fx:id="nameField" promptText="Product Name"/>
     <TextField fx:id="priceField" promptText="Price"/>
@@ -31,5 +31,5 @@
     <Button text="Select Image" onAction="#chooseImage"/>
     <ImageView fx:id="imageView" fitWidth="100" fitHeight="100"/>
 
-    <Button text="ADD" onAction="#confirm"/>
+    <Button text="MODIFY" onAction="#confirm"/>
 </VBox>

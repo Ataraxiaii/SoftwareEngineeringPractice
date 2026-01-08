@@ -79,21 +79,18 @@ public class ProductController {
 
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/com/example/possystem/product_add.fxml")
+                    getClass().getResource("/com/example/possystem/product_modify.fxml")
             );
-            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.setTitle("Modify Product");
 
-            ProductAddController controller = loader.getController();
+            ProductModifyController controller = loader.getController();
             controller.setProduct(selected);
 
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Modify Product");
             stage.showAndWait();
 
-            Product newProduct = controller.getResult();
-            if (newProduct != null) {
-                productService.updateProduct(selected, newProduct); // update database
+            if (controller.isUpdated()) {
                 tableView.refresh();
             }
         } catch (Exception e) {

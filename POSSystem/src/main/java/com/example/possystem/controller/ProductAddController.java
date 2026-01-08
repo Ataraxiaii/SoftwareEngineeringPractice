@@ -20,25 +20,9 @@ public class ProductAddController {
 
     private String imagePath;
     private Product result;
-    private Product editingProduct;
 
     public Product getResult() {
         return result;
-    }
-
-    // Modify Product
-    public void setProduct(Product product) {
-        this.editingProduct = product;
-
-        nameField.setText(product.getName());
-        priceField.setText(String.valueOf(product.getPrice()));
-        stockField.setText(String.valueOf(product.getStock()));
-        statusBox.setValue(product.getStatus());
-
-        if (product.getImagePath() != null) {
-            imagePath = product.getImagePath();
-            imageView.setImage(new Image(imagePath));
-        }
     }
 
     public void chooseImage() {
@@ -54,24 +38,18 @@ public class ProductAddController {
     }
 
     public void confirm() {
-        if (editingProduct == null) {
-            // Add
-            result = new Product(
-                    nameField.getText(),
-                    Double.parseDouble(priceField.getText()),
-                    Integer.parseInt(stockField.getText()),
-                    statusBox.getValue(),
-                    imagePath
-            );
-        } else {
-            // Modify
-            editingProduct.setName(nameField.getText());
-            editingProduct.setPrice(Double.parseDouble(priceField.getText()));
-            editingProduct.setStock(Integer.parseInt(stockField.getText()));
-            editingProduct.setStatus(statusBox.getValue());
-            editingProduct.setImagePath(imagePath);
-        }
+        result = new Product(
+                nameField.getText(),
+                Double.parseDouble(priceField.getText()),
+                Integer.parseInt(stockField.getText()),
+                statusBox.getValue(),
+                imagePath
+        );
 
+        close();
+    }
+
+    private void close() {
         ((Stage) nameField.getScene().getWindow()).close();
     }
 }
