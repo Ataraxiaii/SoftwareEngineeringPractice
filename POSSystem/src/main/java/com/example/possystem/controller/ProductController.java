@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -48,6 +49,21 @@ public class ProductController {
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
         stockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        tableView.setRowFactory(tv -> new TableRow<>() {
+            @Override
+            protected void updateItem(Product product, boolean empty) {
+                super.updateItem(product, empty);
+
+                if (product == null || empty) {
+                    setStyle("");
+                } else if ("Sold Out".equals(product.getStatus())) {
+                    setStyle("-fx-background-color: #ffe6e6;");
+                } else {
+                    setStyle("");
+                }
+            }
+        });
     }
 
     @FXML

@@ -59,7 +59,7 @@ public class ProductModifyController {
         product.setName(nameField.getText());
         product.setPrice(Double.parseDouble(priceField.getText()));
         product.setStock(Integer.parseInt(stockField.getText()));
-        product.setStatus(statusBox.getValue());
+        product.setStock(Integer.parseInt(stockField.getText()));
         product.setImagePath(imagePath);
 
         ProductService.getInstance().updateProduct(product, product);
