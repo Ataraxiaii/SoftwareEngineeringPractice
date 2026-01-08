@@ -12,6 +12,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -70,7 +72,7 @@ public class ReturnController {
         recordTotalCol.setCellValueFactory(data ->
                 new SimpleDoubleProperty(data.getValue().getTotalAmount()).asObject());
         recordTimeCol.setCellValueFactory(data ->
-                new SimpleStringProperty(data.getValue().getCreateTime().toString()));
+                new SimpleStringProperty(data.getValue().getCreateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))));
 
         recordTable.setItems(CustomerRecordService.getInstance().getRecords());
 
