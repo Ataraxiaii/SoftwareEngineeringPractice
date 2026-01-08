@@ -76,6 +76,14 @@ public class PaymentController {
     }
 
     public void cancel() {
+        if (order != null && order.getItems() != null) {
+            for (OrderItem item : order.getItems()) {
+                Product p = item.getProduct();
+                // restore stock
+                p.setStock(p.getStock() + item.getQuantity());
+            }
+        }
+
         SceneSwitcher.switchScene("/com/example/possystem/sale.fxml");
     }
 

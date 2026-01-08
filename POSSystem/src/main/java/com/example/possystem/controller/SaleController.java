@@ -107,7 +107,8 @@ public class SaleController {
             total += item.getSubtotal();
         }
 
-        Order order = new Order(cartList, total);
+        // create payment copy
+        Order order = new Order(new java.util.ArrayList<>(cartList), Double.parseDouble(totalLabel.getText()));
 
         SceneSwitcher.switchScene(
                 "/com/example/possystem/payment.fxml",
