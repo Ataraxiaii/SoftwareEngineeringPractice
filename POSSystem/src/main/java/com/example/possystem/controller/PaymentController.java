@@ -7,6 +7,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import com.example.possystem.model.OrderItem;
+import com.example.possystem.model.Product;
+import com.example.possystem.service.ProductService;
 
 public class PaymentController {
 
@@ -51,9 +54,18 @@ public class PaymentController {
         // save to Customer databases
         try {
             CustomerRecordService.getInstance().addRecord(order.toCustomerRecord());
+
+            ProductService productService = ProductService.getInstance();
+
+            for (OrderItem item : order.getItems()) {
+                Product p = item.getProduct();
+
+                productService.updateProduct(p);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
-            alert("Failed to save order to database");
+            alert("Failed to complete transaction");
             return;
         }
 
