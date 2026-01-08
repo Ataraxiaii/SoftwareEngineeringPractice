@@ -1,35 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<?import javafx.collections.FXCollections?>
 <?import javafx.scene.image.ImageView?>
-<VBox spacing="10" alignment="CENTER"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.possystem.controller.ProductModifyController"
-      style="-fx-padding: 20;">
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 
-    <Label text="Modify Product" style="-fx-font-size: 18px;" />
-
-    <TextField fx:id="nameField" promptText="Product Name"/>
-    <TextField fx:id="priceField" promptText="Price"/>
-    <TextField fx:id="stockField" promptText="Stock"/>
-
-    <ComboBox fx:id="statusBox">
-        <items>
-            <FXCollections fx:factory="observableArrayList">
-                <String fx:value="Available"/>
-                <String fx:value="Sold Out"/>
-            </FXCollections>
-        </items>
-    </ComboBox>
-
-    <Button text="Select Image" onAction="#chooseImage"/>
-    <ImageView fx:id="imageView" fitWidth="100" fitHeight="100"/>
-
-    <Button text="MODIFY" onAction="#confirm"/>
-</VBox>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.possystem.controller.ProductModifyController"
+            prefWidth="500" prefHeight="650" style="-fx-background-color: #f4f4f4;">
+    <top>
+        <VBox alignment="CENTER" style="-fx-background-color: #e67e22; -fx-padding: 30;">
+            <Label text="MODIFY PRODUCT DETAILS" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+        </VBox>
+    </top>
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: white;">
+            <VBox spacing="15" style="-fx-padding: 30;">
+                <VBox spacing="8"><Label text="Product Name:" style="-fx-font-weight: bold;"/><TextField fx:id="nameField" style="-fx-padding: 10;"/></VBox>
+                <VBox spacing="8"><Label text="Price ($):" style="-fx-font-weight: bold;"/><TextField fx:id="priceField" style="-fx-padding: 10;"/></VBox>
+                <VBox spacing="8"><Label text="Update Stock:" style="-fx-font-weight: bold;"/><TextField fx:id="stockField" style="-fx-padding: 10;"/></VBox>
+                <VBox spacing="8">
+                    <Label text="Current Status:" style="-fx-font-weight: bold;"/>
+                    <ComboBox fx:id="statusBox" maxWidth="Infinity" style="-fx-padding: 8;">
+                        <items><FXCollections fx:factory="observableArrayList"><String fx:value="Available"/><String fx:value="Sold Out"/></FXCollections></items>
+                    </ComboBox>
+                </VBox>
+                <VBox spacing="10" alignment="CENTER" style="-fx-padding: 15; -fx-border-color: #dcdde1; -fx-border-style: dashed;">
+                    <Button text="Change Image" onAction="#chooseImage" style="-fx-background-color: #3498db; -fx-text-fill: white;"/>
+                    <ImageView fx:id="imageView" fitWidth="130" fitHeight="130" preserveRatio="true"/>
+                </VBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER" style="-fx-padding: 25; -fx-background-color: #ecf0f1;">
+            <Button text="SAVE CHANGES" onAction="#confirm" prefWidth="250" style="-fx-background-color: #e67e22; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 15;"/>
+        </HBox>
+    </bottom>
+</BorderPane>

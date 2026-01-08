@@ -1,21 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<VBox spacing="15" alignment="CENTER"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.possystem.controller.MainController">
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.possystem.controller.MainController"
+            style="-fx-background-color: #f4f4f4;"
+            prefWidth="900" prefHeight="600">
 
-<Label text="Point-of-Sale System" style="-fx-font-size: 22px;" />
+    <top>
+        <VBox alignment="CENTER" spacing="5" style="-fx-background-color: #2c3e50; -fx-padding: 50;">
+            <Label text="POINT-OF-SALE SYSTEM"
+                   style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white; -fx-letter-spacing: 3px;"/>
+            <Label text="Welcome back! Please select a module to start your work"
+                   style="-fx-font-size: 14px; -fx-text-fill: #bdc3c7;"/>
+        </VBox>
+    </top>
 
-<Button text="Product Management" onAction="#openProduct"/>
-<Button text="Process Sale" onAction="#openSale"/>
-<Button text="Handle Returns" onAction="#openReturn"/>
-<Button text="Customer List" onAction="#openCustomer"/>
+    <center>
+        <HBox alignment="CENTER" spacing="25" style="-fx-padding: 40;">
+            <Button onAction="#openProduct" prefWidth="190" prefHeight="190"
+                    style="-fx-background-color: white; -fx-border-color: #dcdde1; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);">
+                <graphic>
+                    <VBox alignment="CENTER" spacing="15">
+                        <Label text="📦" style="-fx-font-size: 45px;"/>
+                        <Label text="Product" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+                    </VBox>
+                </graphic>
+            </Button>
 
-</VBox>
+            <Button onAction="#openSale" prefWidth="190" prefHeight="190"
+                    style="-fx-background-color: white; -fx-border-color: #dcdde1; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);">
+                <graphic>
+                    <VBox alignment="CENTER" spacing="15">
+                        <Label text="🛒" style="-fx-font-size: 45px;"/>
+                        <Label text="Process Sale" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+                    </VBox>
+                </graphic>
+            </Button>
 
+            <Button onAction="#openReturn" prefWidth="190" prefHeight="190"
+                    style="-fx-background-color: white; -fx-border-color: #dcdde1; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);">
+                <graphic>
+                    <VBox alignment="CENTER" spacing="15">
+                        <Label text="🔄" style="-fx-font-size: 45px;"/>
+                        <Label text="Returns" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+                    </VBox>
+                </graphic>
+            </Button>
+
+            <Button onAction="#openCustomer" prefWidth="190" prefHeight="190"
+                    style="-fx-background-color: white; -fx-border-color: #dcdde1; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);">
+                <graphic>
+                    <VBox alignment="CENTER" spacing="15">
+                        <Label text="👥" style="-fx-font-size: 45px;"/>
+                        <Label text="Customers" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+                    </VBox>
+                </graphic>
+            </Button>
+        </HBox>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" style="-fx-padding: 15 30; -fx-background-color: white; -fx-border-color: #dcdde1; -fx-border-width: 1 0 0 0;">
+            <Label text="System Status: Online | v2.0 Stable" style="-fx-font-size: 12px; -fx-text-fill: #95a5a6;"/>
+        </HBox>
+    </bottom>
+</BorderPane>
