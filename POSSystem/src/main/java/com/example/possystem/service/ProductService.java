@@ -78,6 +78,14 @@ public class ProductService {
         }
     }
 
+    // find product by name
+    public Product findByName(String name) {
+        return products.stream()
+                .filter(p -> p.getName().equalsIgnoreCase(name))
+                .findFirst()
+                .orElse(null);
+    }
+
     // update product
     public void updateProduct(Product p) {
         String sql =
@@ -91,12 +99,23 @@ public class ProductService {
             ps.setDouble(1, p.getPrice());
             ps.setInt(2, p.getStock());
 
-            ps.setString(3, p.getStock() > 0 ? "Available" : "Sold Out");
+            String newStatus = p.getStock() > 0 ? "Available" : "Sold Out";
+            ps.setString(3, newStatus);
 
             ps.setString(4, p.getImagePath());
             ps.setString(5, p.getName());
 
             ps.executeUpdate();
+
+            // refresh
+            for (int i = 0; i < products.size(); i++) {
+                if (products.get(i).getName().equals(p.getName())) {
+                    Product memProduct = products.get(i);
+                    memProduct.setStock(p.getStock());
+                    memProduct.setStatus(newStatus);
+                    break;
+                }
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();

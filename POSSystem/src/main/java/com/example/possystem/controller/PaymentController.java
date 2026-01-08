@@ -1,5 +1,6 @@
 package com.example.possystem.controller;
 
+import com.example.possystem.model.CustomerRecord;
 import com.example.possystem.model.Order;
 import com.example.possystem.service.CustomerRecordService;
 import com.example.possystem.util.SceneSwitcher;
@@ -53,14 +54,17 @@ public class PaymentController {
 
         // save to Customer databases
         try {
-            CustomerRecordService.getInstance().addRecord(order.toCustomerRecord());
+            // change order to recorder
+            CustomerRecord record = order.toCustomerRecord();
 
+            // store to the database
+            CustomerRecordService.getInstance().addRecord(record);
+            order.setId(record.getId());
+
+            // refresh the stock
             ProductService productService = ProductService.getInstance();
-
             for (OrderItem item : order.getItems()) {
-                Product p = item.getProduct();
-
-                productService.updateProduct(p);
+                productService.updateProduct(item.getProduct());
             }
 
         } catch (Exception e) {

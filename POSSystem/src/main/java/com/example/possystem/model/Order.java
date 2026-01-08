@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class Order {
+    private int id;
 
     private String customerName;
     private String phone;
@@ -41,6 +42,9 @@ public class Order {
 
     public double getPaidAmount() { return paidAmount; }
     public void setPaidAmount(double paidAmount) { this.paidAmount = paidAmount; }
+
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
     public LocalDateTime getCreateTime() { return createTime; }
 }

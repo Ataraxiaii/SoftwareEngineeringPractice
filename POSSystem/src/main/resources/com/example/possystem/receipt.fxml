@@ -13,6 +13,11 @@
 
     <Label text="Receipt" style="-fx-font-size: 20px;"/>
 
+    <HBox spacing="10" alignment="CENTER">
+        <Label text="Invoice ID:" style="-fx-font-weight: bold;"/>
+        <Label fx:id="invoiceIdLabel" text="----" style="-fx-text-fill: #2196F3; -fx-font-weight: bold;"/>
+    </HBox>
+
     <Label fx:id="customerLabel" text="Customer: "/>
     <Label fx:id="phoneLabel" text="Phone: "/>
 

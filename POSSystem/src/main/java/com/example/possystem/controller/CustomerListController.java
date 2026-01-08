@@ -27,18 +27,54 @@ public class CustomerListController {
 
     @FXML
     public void initialize() {
-        // load from customer database
         ObservableList<CustomerRecord> records = CustomerRecordService.getInstance().getRecords();
         customerTable.setItems(records);
 
-        nameCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCustomerName()));
-        phoneCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPhone()));
+        // show customer name for return record
+        nameCol.setCellValueFactory(data -> {
+            CustomerRecord r = data.getValue();
+            if ("Return".equals(r.getType())) {
+                // "REF-27"  get number 27
+                int originalId = Integer.parseInt(r.getPhone().replace("REF-", ""));
+                // search record according id
+                CustomerRecord original = records.stream()
+                        .filter(rec -> rec.getId() == originalId && "Shopping".equals(rec.getType()))
+                        .findFirst().orElse(null);
+
+                if (original != null) {
+                    return new SimpleStringProperty(original.getCustomerName() + " (Return)");
+                }
+            }
+            return new SimpleStringProperty(r.getCustomerName());
+        });
+
+        //nameCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCustomerName()));
         itemsCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getItemsSummary()));
         totalCol.setCellValueFactory(data -> new SimpleDoubleProperty(data.getValue().getTotalAmount()).asObject());
         typeCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getType()));
         timeCol.setCellValueFactory(data -> new SimpleStringProperty(
                 data.getValue().getCreateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
         ));
+
+        phoneCol.setCellValueFactory(data -> {
+            CustomerRecord r = data.getValue();
+            if ("Return".equals(r.getType())) {
+                int originalId = Integer.parseInt(r.getPhone().replace("REF-", ""));
+                CustomerRecord original = records.stream()
+                        .filter(rec -> rec.getId() == originalId && "Shopping".equals(rec.getType()))
+                        .findFirst().orElse(null);
+
+                // calculate the amount of returning
+                long count = records.stream()
+                        .filter(rec -> "Return".equals(rec.getType()) && r.getPhone().equals(rec.getPhone()))
+                        .filter(rec -> !rec.getCreateTime().isAfter(r.getCreateTime()))
+                        .count();
+
+                String phoneStr = (original != null) ? original.getPhone() : "Unknown";
+                return new SimpleStringProperty(phoneStr + " [Attempt: " + count + "]");
+            }
+            return new SimpleStringProperty(r.getPhone());
+        });
     }
 
     @FXML
@@ -52,7 +88,7 @@ public class CustomerListController {
         alert.showAndWait();
 
         if (alert.getResult() == ButtonType.YES) {
-            // delete dataabse
+            // delete database
             CustomerRecordService.getInstance().removeRecord(selected);
             customerTable.getItems().remove(selected);
         }

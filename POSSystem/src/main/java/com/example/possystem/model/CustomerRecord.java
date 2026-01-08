@@ -45,4 +45,17 @@ public class CustomerRecord {
                 .map(i -> i.getProduct().getName() + "*" + i.getQuantity())
                 .collect(Collectors.joining(", "));
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CustomerRecord that = (CustomerRecord) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(id);
+    }
 }

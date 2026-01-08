@@ -52,7 +52,12 @@ public class CustomerRecordService {
                             String productName = rsItems.getString("product_name");
                             int qty = rsItems.getInt("quantity");
                             double price = rsItems.getDouble("price");
-                            items.add(new OrderItem(new Product(productName, price, 0, "", null), qty));
+
+                            Product realProduct = ProductService.getInstance().findByName(productName);
+                            if (realProduct == null) {
+                                realProduct = new Product(productName, price, 0, "Deleted", null);
+                            }
+                            items.add(new OrderItem(realProduct, qty));
                         }
                     }
                 }
@@ -131,5 +136,13 @@ public class CustomerRecordService {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    // find record by invoice id and type is shopping
+    public CustomerRecord findById(int id) {
+        return records.stream()
+                .filter(r -> r.getId() == id && "Shopping".equals(r.getType()))
+                .findFirst()
+                .orElse(null);
     }
 }
