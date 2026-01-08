@@ -117,7 +117,18 @@ public class SaleController {
     }
 
     public void goBack() {
+        rollbackInventory(); //  restore stock when leaving
         SceneSwitcher.switchScene("/com/example/possystem/main.fxml");
+    }
+
+    public void rollbackInventory() {
+        for (OrderItem item : cartList) {
+            Product p = item.getProduct();
+            // restore cart quantity to memory object
+            p.setStock(p.getStock() + item.getQuantity());
+        }
+        cartList.clear();
+        productListView.refresh();
     }
 
     private void alert(String msg) {
