@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="10" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.possystem.controller.ReturnController">
+    <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+
+    <HBox spacing="10">
+        <Label text="Search Records:"/>
+        <TextField fx:id="searchField" promptText="Search by name, phone or items"/>
+        <Button text="Search" onAction="#searchRecords"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Back to Main" onAction="#goBack"/>
+    </HBox>
+
+    <Label text="Purchase Records"/>
+    <TableView fx:id="recordTable" prefHeight="150">
+        <columns>
+            <TableColumn fx:id="recordNameCol" text="Customer Name"/>
+            <TableColumn fx:id="recordPhoneCol" text="Phone"/>
+            <TableColumn fx:id="recordItemsCol" text="Items" prefWidth="200"/>
+            <TableColumn fx:id="recordTotalCol" text="Total"/>
+            <TableColumn fx:id="recordTimeCol" text="Purchase Time" prefWidth="150"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="20">
+        <VBox spacing="10" prefWidth="400">
+            <Label text="Original Purchase Items"/>
+            <TableView fx:id="originalItemsTable" prefHeight="200">
+                <columns>
+                    <TableColumn fx:id="originalNameCol" text="Product" prefWidth="150"/>
+                    <TableColumn fx:id="originalPriceCol" text="Price"/>
+                    <TableColumn fx:id="originalQtyCol" text="Quantity"/>
+                </columns>
+            </TableView>
+            <Button text="Add to Return" onAction="#addToReturn"/>
+        </VBox>
+
+        <VBox spacing="10" prefWidth="400">
+            <Label text="Return Items"/>
+            <TableView fx:id="returnItemsTable" prefHeight="200">
+                <columns>
+                    <TableColumn fx:id="returnNameCol" text="Product" prefWidth="150"/>
+                    <TableColumn fx:id="returnPriceCol" text="Price"/>
+                    <TableColumn fx:id="returnQtyCol" text="Quantity"/>
+                    <TableColumn fx:id="returnSubtotalCol" text="Subtotal"/>
+                </columns>
+            </TableView>
+            <HBox spacing="10">
+                <Button text="Remove" onAction="#removeFromReturn"/>
+                <Button text="Update Quantity" onAction="#updateReturnQuantity"/>
+            </HBox>
+        </VBox>
+    </HBox>
+
+    <VBox spacing="10">
+        <Label text="Return Reason"/>
+        <TextField fx:id="returnReasonField" promptText="Enter return reason..."/>
+
+        <HBox spacing="10">
+            <Label fx:id="totalRefundLabel" text="Total Refund: $0.00" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Process Return" onAction="#processReturn"
+                    style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+        </HBox>
+    </VBox>
+</VBox>

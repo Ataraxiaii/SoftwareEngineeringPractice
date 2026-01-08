@@ -2,8 +2,8 @@ package com.example.possystem.model;
 
 public class OrderItem {
 
-    private Product product;
-    private int quantity;
+    private final Product product;
+    private final int quantity;
 
     public OrderItem(Product product, int quantity) {
         this.product = product;

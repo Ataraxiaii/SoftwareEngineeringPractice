@@ -15,6 +15,7 @@ public class MainController {
     }
 
     public void openReturn() {
+        SceneSwitcher.switchScene("/com/example/possystem/return.fxml");
         System.out.println("Enter the return interface");
     }
 
