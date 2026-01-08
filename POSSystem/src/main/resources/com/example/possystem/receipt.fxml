@@ -1,38 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<VBox spacing="12" alignment="CENTER"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.possystem.controller.ReceiptController"
-      style="-fx-padding: 20;">
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.possystem.controller.ReceiptController"
+            prefWidth="500" prefHeight="650" style="-fx-background-color: #f4f4f4;">
 
-    <Label text="Receipt" style="-fx-font-size: 20px;"/>
+    <top>
+        <VBox alignment="CENTER" spacing="5" style="-fx-background-color: #2c3e50; -fx-padding: 20;">
+            <Label text="TRANSACTION RECEIPT" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+            <HBox spacing="8" alignment="CENTER">
+                <Label text="Invoice ID:" style="-fx-text-fill: #bdc3c7;"/>
+                <Label fx:id="invoiceIdLabel" text="----" style="-fx-text-fill: #3498db; -fx-font-weight: bold;"/>
+            </HBox>
+        </VBox>
+    </top>
 
-    <HBox spacing="10" alignment="CENTER">
-        <Label text="Invoice ID:" style="-fx-font-weight: bold;"/>
-        <Label fx:id="invoiceIdLabel" text="----" style="-fx-text-fill: #2196F3; -fx-font-weight: bold;"/>
-    </HBox>
+    <center>
+        <VBox spacing="15" style="-fx-padding: 25; -fx-background-color: white; -fx-background-radius: 5; -fx-border-color: #dcdde1;">
+            <BorderPane.margin>
+                <Insets top="10" right="20" bottom="10" left="20"/>
+            </BorderPane.margin>
 
-    <Label fx:id="customerLabel" text="Customer: "/>
-    <Label fx:id="phoneLabel" text="Phone: "/>
+            <VBox spacing="5" style="-fx-padding: 0 0 10 0; -fx-border-color: #f4f4f4; -fx-border-width: 0 0 1 0;">
+                <Label fx:id="customerLabel" text="Customer: " style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+                <Label fx:id="phoneLabel" text="Phone: " style="-fx-text-fill: #7f8c8d;"/>
+            </VBox>
 
-    <TableView fx:id="receiptTable" prefHeight="300">
-        <columns>
-            <TableColumn fx:id="nameCol" text="Product"/>
-            <TableColumn fx:id="priceCol" text="Unit Price"/>
-            <TableColumn fx:id="qtyCol" text="Quantity"/>
-            <TableColumn fx:id="subtotalCol" text="Subtotal"/>
-        </columns>
-    </TableView>
+            <TableView fx:id="receiptTable" VBox.vgrow="ALWAYS" style="-fx-background-radius: 5;">
+                <columns>
+                    <TableColumn fx:id="nameCol" text="Product" prefWidth="140"/>
+                    <TableColumn fx:id="priceCol" text="Unit Price" prefWidth="85"/>
+                    <TableColumn fx:id="qtyCol" text="Qty" prefWidth="60"/>
+                    <TableColumn fx:id="subtotalCol" text="Subtotal" prefWidth="95"/>
+                </columns>
+                <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
+            </TableView>
 
-    <Label fx:id="totalLabel" text="Total: $0.0"/>
-    <Label fx:id="paidLabel" text="Paid: $0.0"/>
-    <Label fx:id="changeLabel" text="Change: $0.0"/>
+            <VBox spacing="8" alignment="CENTER_RIGHT" style="-fx-background-color: #fafafa; -fx-padding: 15; -fx-background-radius: 5;">
+                <HBox alignment="CENTER_RIGHT" spacing="10">
+                    <Label text="TOTAL AMOUNT:" style="-fx-font-weight: bold;"/>
+                    <Label fx:id="totalLabel" text="Total: $0.0" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+                </HBox>
+                <HBox alignment="CENTER_RIGHT" spacing="10">
+                    <Label text="CASH PAID:" style="-fx-text-fill: #7f8c8d;"/>
+                    <Label fx:id="paidLabel" text="Paid: $0.0" style="-fx-font-weight: bold; -fx-text-fill: #27ae60;"/>
+                </HBox>
+                <Separator maxWidth="200" style="-fx-padding: 5 0;"/>
+                <HBox alignment="CENTER_RIGHT" spacing="10">
+                    <Label text="CHANGE DUE:" style="-fx-font-weight: bold;"/>
+                    <Label fx:id="changeLabel" text="Change: $0.0" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #e74c3c;"/>
+                </HBox>
+            </VBox>
+        </VBox>
+    </center>
 
-    <Button text="OK" onAction="#finish"/>
-</VBox>
+    <bottom>
+        <HBox alignment="CENTER" style="-fx-padding: 20; -fx-background-color: #ecf0f1; -fx-border-color: #dcdde1; -fx-border-width: 1 0 0 0;">
+            <Button text="PRINT &amp; FINISH" onAction="#finish" prefWidth="220"
+                    style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 12;"/>
+        </HBox>
+    </bottom>
+</BorderPane>

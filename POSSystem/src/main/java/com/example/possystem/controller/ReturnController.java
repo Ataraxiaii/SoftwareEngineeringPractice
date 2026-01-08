@@ -253,7 +253,7 @@ public class ReturnController {
     }
 
     private void updateTotalRefund() {
-        totalRefundLabel.setText(String.format("Total Refund: $%.2f", calculateRefundTotal()));
+        totalRefundLabel.setText(String.format("%.2f", calculateRefundTotal()));
     }
 
     private void showAlert(String msg) {
