@@ -22,6 +22,16 @@ public class Product {
         this.stock = stock;
         this.status = status;
         this.imagePath = imagePath;
+        updateStatus();
+    }
+
+    private void updateStatus() {
+        this.status = (stock > 0) ? "Available" : "Sold Out";
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+        updateStatus();
     }
 
     // ===== Getter & Setter =====
@@ -32,7 +42,6 @@ public class Product {
     public void setPrice(double price) { this.price = price; }
 
     public int getStock() { return stock; }
-    public void setStock(int stock) { this.stock = stock; }
 
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
