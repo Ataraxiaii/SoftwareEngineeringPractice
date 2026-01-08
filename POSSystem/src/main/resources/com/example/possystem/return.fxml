@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="15" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.possystem.controller.ReturnController" style="-fx-background-color: #f5f5f5;">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+    <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-padding: 10; -fx-background-radius: 5; -fx-border-color: #ddd;">
+        <Label text="Invoice ID:" style="-fx-font-weight: bold;"/>
+        <TextField fx:id="searchField" promptText="Enter ID and click search..." prefWidth="250"/>
+        <Button text="Search Records" onAction="#searchRecords" style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Back to Main" onAction="#goBack"/>
+    </HBox>
+
+    <HBox spacing="20" VBox.vgrow="ALWAYS">
+        <VBox spacing="10" prefWidth="480">
+            <Label text="[ RECORD INQUIRY ]" style="-fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+
+            <GridPane hgap="10" vgap="5" style="-fx-background-color: #e3f2fd; -fx-padding: 10; -fx-background-radius: 5;">
+                <Label text="Customer:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+                <Label fx:id="customerNameLabel" text="-" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                <Label text="Phone:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
+                <Label fx:id="customerPhoneLabel" text="-" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                <Label text="Purchase Time:" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-weight: bold;"/>
+                <Label fx:id="purchaseTimeLabel" text="-" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+            </GridPane>
+
+            <VBox spacing="5" VBox.vgrow="ALWAYS" style="-fx-background-color: white; -fx-padding: 10; -fx-background-radius: 5; -fx-border-color: #ddd;">
+                <Label text="1. Original Purchase Details" style="-fx-text-fill: #2e7d32; -fx-font-weight: bold;"/>
+                <TableView fx:id="originalItemsTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="originalNameCol" text="Product Name" prefWidth="200"/>
+                        <TableColumn fx:id="originalPriceCol" text="Price" prefWidth="80"/>
+                        <TableColumn fx:id="originalQtyCol" text="Purchased Qty" prefWidth="100"/>
+                    </columns>
+                </TableView>
+            </VBox>
+
+            <VBox spacing="5" prefHeight="220" style="-fx-background-color: white; -fx-padding: 10; -fx-background-radius: 5; -fx-border-color: #ddd;">
+                <Label text="2. Refund/Return History" style="-fx-text-fill: #d32f2f; -fx-font-weight: bold;"/>
+                <TextArea fx:id="historyReturnArea" editable="false" wrapText="true"
+                          promptText="No previous return records..." VBox.vgrow="ALWAYS"
+                          style="-fx-control-inner-background: #fafafa; -fx-font-family: 'Monospaced'; -fx-font-size: 12;"/>
+            </VBox>
+        </VBox>
+
+        <VBox spacing="15" HBox.hgrow="ALWAYS" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 5; -fx-border-color: #ccc;">
+            <Label text="[ RETURN PROCESSING ]" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #1976D2;"/>
+            <Separator/>
+
+            <HBox spacing="10" alignment="BOTTOM_LEFT">
+                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                    <Label text="Select Product:"/>
+                    <ComboBox fx:id="productComboBox" promptText="Choose item" maxWidth="Infinity"/>
+                </VBox>
+                <VBox spacing="5">
+                    <Label text="Quantity:"/>
+                    <TextField fx:id="inputReturnQty" prefWidth="80"/>
+                </VBox>
+                <Button text="Add to List" onAction="#addItemToCurrentReturn"
+                        style="-fx-background-color: #ff9800; -fx-text-fill: white; -fx-font-weight: bold;"/>
+            </HBox>
+
+            <TableView fx:id="returnItemsTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="returnNameCol" text="Product Name" prefWidth="180"/>
+                    <TableColumn fx:id="returnQtyCol" text="Qty" prefWidth="70"/>
+                    <TableColumn fx:id="returnSubtotalCol" text="Refund Subtotal" prefWidth="110"/>
+                </columns>
+            </TableView>
+
+            <VBox spacing="8" style="-fx-background-color: #fffde7; -fx-padding: 10; -fx-background-radius: 5; -fx-border-color: #fbc02d;">
+                <Label text="Batch Return Reason (Apply to all items above):" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="returnReasonField" promptText="Enter reason for this batch return..."/>
+
+                <HBox alignment="CENTER_RIGHT" spacing="20">
+                    <Label fx:id="totalRefundLabel" text="Total Refund: $0.00" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #d32f2f;"/>
+                    <Button text="Process Batch Return" onAction="#processReturn"
+                            style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-padding: 10 30; -fx-font-weight: bold;"/>
+                </HBox>
+            </VBox>
+        </VBox>
+    </HBox>
+</VBox>

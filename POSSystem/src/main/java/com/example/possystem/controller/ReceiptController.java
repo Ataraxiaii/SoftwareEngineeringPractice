@@ -30,6 +30,8 @@ public class ReceiptController {
     @FXML private Label paidLabel;
     @FXML private Label changeLabel;
 
+    @FXML private Label invoiceIdLabel;
+
     private Order order;
     private ObservableList<OrderItem> itemList = FXCollections.observableArrayList();
 
@@ -39,6 +41,13 @@ public class ReceiptController {
 
         customerLabel.setText("Customer: " + order.getCustomerName());
         phoneLabel.setText("Phone: " + order.getPhone());
+
+        // display order id
+        if (order.getId() > 0) {
+            invoiceIdLabel.setText(String.valueOf(order.getId()));
+        } else {
+            invoiceIdLabel.setText("N/A");
+        }
 
         itemList.addAll(order.getItems());
         receiptTable.setItems(itemList);
@@ -60,18 +69,9 @@ public class ReceiptController {
     }
 
     // Go back to main page
+    @FXML
     public void finish() {
-        // record shopping
         try {
-            CustomerRecord record = new CustomerRecord(
-                    order.getCustomerName(),
-                    order.getPhone(),
-                    order.getItems(),
-                    order.getTotalAmount(),
-                    "Shopping"
-            );
-
-            // Back to main pages
             SceneSwitcher.switchScene("/com/example/possystem/main.fxml");
         } catch (Exception e) {
             e.printStackTrace();

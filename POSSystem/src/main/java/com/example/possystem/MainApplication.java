@@ -7,9 +7,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Locale;
+
 public class MainApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
+        Locale.setDefault(Locale.ENGLISH);
+
         DBUtil.initDB();
         SceneSwitcher.setStage(stage);
 
