@@ -84,6 +84,7 @@ public class SaleController {
         p.setStock(p.getStock() + item.getQuantity());
 
         cartList.remove(item);
+        productListView.refresh();
         updateTotal();
     }
 
